@@ -1,6 +1,9 @@
 package com.bridgelabz.invoicegenerator;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -39,6 +42,15 @@ public class InvoiceGeneratorTest {
 						 new Ride(15, 2)
 					   	};
 		InvoiceSummary invoiceSummary  = invoiceGenerator.getSummary(rides);
+		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2,255,127.5);
+		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
+	}
+	@Test
+	public void givenUserID_ShouldReturnInvoiceSummary() {
+		String userId = "U001";
+		invoiceGenerator.addUserRide(userId,new Ride(10, 3));
+		invoiceGenerator.addUserRide(userId,new Ride(15, 2));
+		InvoiceSummary invoiceSummary = invoiceGenerator.getSummaryByUserId(userId);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2,255,127.5);
 		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
 	}
